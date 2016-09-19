@@ -1,0 +1,58 @@
+import os
+import re
+
+os.chdir(r'C:\\logs')
+f = open('elblogs.txt', 'r')
+
+class GetAtts:
+	apiCount = 0
+	user = 'nyr8nx'
+	caseId = 'X9KN0'
+	apiString = 'api/(.*)HTTP'
+	lista = []
+	listo = []
+	def _init_(self):
+		print('Get started')
+	def match():
+		f.seek(0)
+		counter = 0
+		ids = (GetAtts.user, GetAtts.caseId)
+		for line in f:
+			if all(id in line for id in ids):
+				counter += 1
+		print(counter)
+	def check():
+		f.seek(0)
+		counter = 0
+		for line in f:
+			if GetAtts.user in line:
+				counter += 1
+		print(counter)
+	def api():
+		f.seek(0)
+		for line in f:
+			result = re.search(GetAtts.apiString, line)
+			if result:
+				(GetAtts.lista).append(result.group(1))
+		newlist = Counter(GetAtts.lista).most_common()
+		for d in newlist:
+			(GetAtts.listo).append(d[0])
+		return GetAtts.listo
+	def loopa():
+		f.seek(0)
+		for aLog in GetAtts.api():
+			counter = 0
+			f.seek(0)
+			for line in f:
+				if aLog in line:
+					counter += 1
+			print("{:.2%}".format(counter/GetAtts.getAll()), counter, 'api/' + aLog)
+		print(GetAtts.getAll(), 'Total api requests')
+	def getAll():
+		f.seek(0)
+		counter = 0
+		for line in f:
+			result = re.search(GetAtts.apiString, line)
+			if result:
+				counter += 1
+		return counter
